@@ -214,6 +214,7 @@ function loadCompanySetup(){
 
         <br>
         <button onclick="addCompanyRow()">Add Company</button>
+        <button onclick="removeCompanyRow()">Remove Company</button>
     `;
 }
 
@@ -224,6 +225,17 @@ function addCompanyRow(){
     for(let i=0;i<12;i++){
         const cell = row.insertCell();
         cell.contentEditable = "true";
+    }
+}
+
+function removeCompanyRow(){
+    const table = document.getElementById("company-table-body");
+    const rowCount = table.rows.length;
+
+    if(rowCount > 1){
+        table.deleteRow(rowCount - 1);
+    } else {
+        alert("At least one row must remain.");
     }
 }
 
