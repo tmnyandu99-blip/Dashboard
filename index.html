@@ -86,6 +86,23 @@ body {
 .excel-table td {
     min-width: 140px;
 }
+
+/*Add widget styling*/
+
+.widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.widget {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-weight: bold;
+}
+    
 </style>
 </head>
 
@@ -99,7 +116,7 @@ body {
 
     <div class="menu-item" onclick="toggleSars()"> SARS</div>
     <div id="sars-submenu" class="submenu">
-        <div class="submenu-item">Company Taxes</div>
+        <div class="submenu-item" onclick="loadCompanyTaxes()">Company Taxes</div>
         <div class="submenu-item">Personal Taxes</div>
     </div>
 
@@ -250,6 +267,22 @@ function yesNoDropdown(){
             <option>No</option>
         </select>
     </td>
+    `;
+}
+
+function loadCompanyTaxes(){
+    document.getElementById("main-content").innerHTML = `
+        <h2>SARS — Company Taxes</h2>
+
+        <div class="widgets">
+            <div class="widget">EMP201</div>
+            <div class="widget">EMP501</div>
+            <div class="widget">IRPs</div>
+            <div class="widget">VAT201</div>
+            <div class="widget">IRP6</div>
+            <div class="widget">ITR14</div>
+            <div class="widget">IRP5/ITa</div>
+        </div>
     `;
 }
     
