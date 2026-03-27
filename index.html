@@ -81,7 +81,11 @@ body {
         <div class="submenu-item">Personal Taxes</div>
     </div>
 
-    <div class="menu-item"> CIPC</div>
+    <div class="menu-item" onclick="toggleCipc()"> CIPC</div>
+    <div id="cipc-submenu" class="submenu">
+    <    div class="submenu-item">Annual returns</div>
+    </div>
+    
     <div class="menu-item"> Secreterial</div>
     <div class="menu-item"> Staff workload</div>
     <div class="menu-item"> Reports</div>
@@ -102,6 +106,17 @@ function toggleSars() {
         menu.style.display = "block";
     }
 }
+    
+function toggleCipc() {
+    var menu = document.getElementById("cipc-submenu");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+    
 </script>
 
 </body>
