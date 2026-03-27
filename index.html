@@ -63,7 +63,6 @@ body {
     padding: 20px;
     background: #f1f5f9;
 }
-
 </style>
 </head>
 
@@ -83,9 +82,9 @@ body {
 
     <div class="menu-item" onclick="toggleCipc()"> CIPC</div>
     <div id="cipc-submenu" class="submenu">
-    <    div class="submenu-item">Annual returns</div>
+        <div class="submenu-item">Annual returns</div>
     </div>
-    
+
     <div class="menu-item"> Secreterial</div>
     <div class="menu-item"> Staff workload</div>
     <div class="menu-item"> Reports</div>
@@ -99,24 +98,21 @@ body {
 <script>
 function toggleSars() {
     var menu = document.getElementById("sars-submenu");
-
     if (menu.style.display === "block") {
         menu.style.display = "none";
     } else {
         menu.style.display = "block";
     }
 }
-    
+
 function toggleCipc() {
     var menu = document.getElementById("cipc-submenu");
-
     if (menu.style.display === "block") {
         menu.style.display = "none";
     } else {
         menu.style.display = "block";
     }
 }
-    
 </script>
 
 </body>
