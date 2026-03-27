@@ -1,1 +1,18 @@
-
+[
+    {
+        "client": "ABC Pty Ltd",
+        "type": "SARS",
+        "compliance": "VAT",
+        "dueDate": "2026-04-05",
+        "assigned": "Thabo",
+        "status": "Pending"
+    },
+    {
+        "client": "XYZ Holdings",
+        "type": "CIPC",
+        "compliance": "Annual Return",
+        "dueDate": "2026-03-28",
+        "assigned": "John",
+        "status": "Pending"
+    }
+]
