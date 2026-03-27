@@ -122,3 +122,29 @@ function renderDashboard(){
     document.getElementById("completionRate").innerText =
         Math.round((completed / dataStore.length) * 100) + "% Completed";
 }
+
+const API_URL = "https://script.google.com/macros/s/AKfycby4LJ7vTYE128HK4GxHVU5xuVzXwwe2ODLqf5hKfrNWv22kf4kZrH0PXp4PYDadL9eu/exec";
+
+async function loadData(){
+    const res = await fetch(API_URL);
+    dataStore = await res.json();
+    renderDashboard();
+}
+
+async function addNewItem(){
+    const item = {
+        client: document.getElementById("client").value,
+        type: document.getElementById("type").value,
+        compliance: document.getElementById("compliance").value,
+        dueDate: document.getElementById("dueDate").value,
+        assigned: document.getElementById("assigned").value,
+        status: "Pending"
+    };
+
+    await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(item)
+    });
+
+    loadData();
+}
