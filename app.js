@@ -1,19 +1,18 @@
 
+let dataStore = [];
+
 async function loadData() {
     const response = await fetch('data.json');
     const data = await response.json();
 
-    const today = new Date();
-    const week = new Date();
-    week.setDate(today.getDate() + 7);
+    dataStore = Update app.js
 
-    let completed = 0;
+Add this at the TOP:
 
-    data.forEach(item => {
-        const due = new Date(item.dueDate);
+let dataStore = [];
+Replace inside loadData() after fetching data:
 
-        if(item.status === "Completed"){
-            completed++;
+data;
         }
 
         if(due < today && item.status !== "Completed"){
@@ -68,4 +67,58 @@ function addStaff(item){
     });
 }
 
+function addNewItem(){
+    const item = {
+        client: document.getElementById("client").value,
+        type: document.getElementById("type").value,
+        compliance: document.getElementById("compliance").value,
+        dueDate: document.getElementById("dueDate").value,
+        assigned: document.getElementById("assigned").value,
+        status: "Pending"
+    };
+
+    dataStore.push(item);
+
+    clearDashboard();
+    renderDashboard();
+}
+
 loadData();
+
+function clearDashboard(){
+    document.querySelectorAll(".card ul").forEach(ul => ul.innerHTML = "");
+}
+
+function renderDashboard(){
+    const today = new Date();
+    const week = new Date();
+    week.setDate(today.getDate() + 7);
+
+    let completed = 0;
+
+    dataStore.forEach(item => {
+        const due = new Date(item.dueDate);
+
+        if(item.status === "Completed") completed++;
+
+        if(due < today && item.status !== "Completed"){
+            addItem('overdue', item);
+        }
+
+        if(due >= today && due <= week){
+            addItem('week', item);
+        }
+
+        if(due.getMonth() === today.getMonth()){
+            addItem('month', item);
+        }
+
+        if(item.type === "SARS") addItem('sars', item);
+        if(item.type === "CIPC") addItem('cipc', item);
+
+        addStaff(item);
+    });
+
+    document.getElementById("completionRate").innerText =
+        Math.round((completed / dataStore.length) * 100) + "% Completed";
+}
