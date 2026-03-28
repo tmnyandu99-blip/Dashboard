@@ -285,7 +285,7 @@ function loadCompanyTaxes(){
         <h2>SARS — Company Taxes</h2>
 
         <div class="widgets">
-            <div class="widget">EMP201</div>
+            <div class="widget" onclick="loadEMP201()">EMP201</div>
             <div class="widget">EMP501</div>
             <div class="widget">IRPs</div>
             <div class="widget">VAT201</div>
@@ -294,6 +294,79 @@ function loadCompanyTaxes(){
             <div class="widget">IRP5/ITa</div>
         </div>
     `;
+}
+
+function loadEMP201(){
+
+    document.getElementById("main-content").innerHTML = `
+        <h2>SARS — EMP201</h2>
+
+        <div class="table-container">
+        <table class="excel-table">
+            <thead>
+                <tr>
+                    <th>Business name</th>
+                    <th>March</th>
+                    <th>April</th>
+                    <th>May</th>
+                    <th>June</th>
+                    <th>July</th>
+                    <th>August</th>
+                    <th>September</th>
+                    <th>October</th>
+                    <th>November</th>
+                    <th>December</th>
+                    <th>January</th>
+                    <th>February</th>
+                </tr>
+            </thead>
+            <tbody id="emp201-body">
+            </tbody>
+        </table>
+        </div>
+    `;
+
+    populateEMP201();
+}
+
+    /*pull companies from company setup*/
+
+    function populateEMP201(){
+
+    const empBody = document.getElementById("emp201-body");
+
+    // read company setup table
+    const companyTable = document.querySelector("#company-table-body");
+
+    if(!companyTable) {
+        empBody.innerHTML = "<tr><td colspan='13'>No company data found</td></tr>";
+        return;
+    }
+
+    const rows = companyTable.rows;
+
+    for(let i = 0; i < rows.length; i++){
+
+        const cells = rows[i].cells;
+
+        const businessName = cells[0].innerText;
+
+        const emp201Dropdown = cells[4].querySelector("select");
+
+        if(emp201Dropdown && emp201Dropdown.value === "Yes"){
+
+            const newRow = empBody.insertRow();
+
+            // business name
+            newRow.insertCell().innerText = businessName;
+
+            // months
+            for(let m = 0; m < 12; m++){
+                const cell = newRow.insertCell();
+                cell.contentEditable = "true";
+            }
+        }
+    }
 }
     
 </script>
