@@ -264,7 +264,7 @@ function createRow(){
         ${yesNoDropdown()}
         ${yesNoDropdown()}
         ${yesNoDropdown()}
-        ${yesNoDropdown()}
+        ${vatDropdown()}
         ${yesNoDropdown()}
         ${yesNoDropdown()}
         ${yesNoDropdown()}
@@ -502,9 +502,8 @@ function populateVAT201(){
 
     companyDatabase.forEach(company => {
 
-        if(company.vat201 === "Yes"){
+        if(company.vat201 === "Yes Group A"){
 
-            /* Table A */
             const rowA = bodyA.insertRow();
             rowA.insertCell().innerText = company.name;
 
@@ -513,7 +512,10 @@ function populateVAT201(){
                 cell.contentEditable = "true";
             }
 
-            /* Table B */
+        }
+
+        if(company.vat201 === "Yes Group B"){
+
             const rowB = bodyB.insertRow();
             rowB.insertCell().innerText = company.name;
 
@@ -525,6 +527,19 @@ function populateVAT201(){
         }
 
     });
+}
+
+   function vatDropdown(){
+    return `
+    <td>
+        <select>
+            <option value=""></option>
+            <option>No</option>
+            <option>Yes Group A</option>
+            <option>Yes Group B</option>
+        </select>
+    </td>
+    `;
 }
     
 </script>
