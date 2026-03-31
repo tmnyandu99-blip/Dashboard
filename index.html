@@ -137,7 +137,7 @@ body {
 
     <div class="menu-item" onclick="toggleCipc()"> CIPC</div>
     <div id="cipc-submenu" class="submenu">
-        <div class="submenu-item">Annual returns</div>
+        <div class="submenu-item" onclick="loadAnnualReturns()">Annual returns</div>
     </div>
 
     <div class="menu-item" onclick="toggleSecretarial()"> Secreterial</div>
@@ -680,6 +680,68 @@ function saveStaffSetup(){
     });
 }
 
+/*Annual reutns tab*/
+
+function loadAnnualReturns(){
+
+    saveCompanySetup();
+
+    document.getElementById("main-content").innerHTML = `
+        <h2>CIPC — Annual Returns</h2>
+
+        <div class="table-container">
+        <table class="excel-table">
+            <thead>
+                <tr>
+                    <th>Business Name</th>
+                    <th>Company Registration</th>
+                    <th>Registration Date</th>
+                    <th>Month</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody id="ar-body"></tbody>
+        </table>
+        </div>
+    `;
+
+    populateAnnualReturns();
+
+    setTimeout(enableColumnResize, 100);
+}
+
+function populateAnnualReturns(){
+
+    const body = document.getElementById("ar-body");
+
+    companyDatabase.forEach(company => {
+
+        if(company.ar === "Yes"){
+
+            const row = body.insertRow();
+
+            row.insertCell().innerText = company.name;
+            row.insertCell().innerText = company.reg;
+            row.insertCell().innerText = company.regDate;
+
+            // Auto calculate month from registration date
+            const monthCell = row.insertCell();
+
+            if(company.regDate){
+                const date = new Date(company.regDate);
+                const month = date.toLocaleString('default', { month: 'long' });
+                monthCell.innerText = month;
+            }else{
+                monthCell.innerText = "";
+            }
+
+            // Notes editable
+            const notesCell = row.insertCell();
+            notesCell.contentEditable = "true";
+        }
+
+    });
+}
     
 </script>
 
