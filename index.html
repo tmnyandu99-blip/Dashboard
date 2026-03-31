@@ -162,7 +162,7 @@ body {
         <div class="submenu-item">Staff 5</div>
     </div>
 
-    <div class="menu-item" onclick="toggleStaff()"> Reports</div>
+    <div class="menu-item" onclick="toggleReports()"> Reports</div>
         <div class="submenu-item">SARS</div>
         <div class="submenu-item">CIPC</div>
         <div class="submenu-item">Secreterial</div>
@@ -211,6 +211,10 @@ function toggleSettings(){
 function toggleMenu(id){
     var menu = document.getElementById(id);
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+/* This is the code I wrote myself*/
+function toggleReports(){
+    toggleMenu("reports-submenu");
 }
 
 /* Load Company Setup Table */
