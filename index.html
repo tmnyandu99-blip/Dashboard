@@ -210,6 +210,7 @@ function loadCompanySetup(){
              <table class="excel-table">
             <thead>
                 <tr>
+                    <th>Select</th>
                     <th>Business Name</th>
                     <th>Company registration number</th>
                     <th>Registration Date</th>
@@ -243,18 +244,30 @@ function addCompanyRow(){
 
 function removeCompanyRow(){
     const table = document.getElementById("company-table-body");
-    const rowCount = table.rows.length;
+    const rows = table.querySelectorAll("tr");
 
-    if(rowCount > 1){
-        table.deleteRow(rowCount - 1);
-    } else {
-        alert("At least one row must remain.");
+    let deleted = false;
+
+    rows.forEach((row, index) => {
+        const checkbox = row.querySelector(".row-select");
+
+        if(checkbox && checkbox.checked){
+            table.deleteRow(index);
+            deleted = true;
+        }
+    });
+
+    if(!deleted){
+        alert("Please select a company row to delete.");
     }
 }
 
 function createRow(){
     return `
     <tr>
+
+        <td><input type="checkbox" class="row-select"></td>
+        
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
